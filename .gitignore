@@ -13,6 +13,10 @@ backend/.pytest_cache/
 backend/.mypy_cache/
 backend/.coverage
 
+# SQLite databases (local state, never commit)
+*.db
+*.db-journal
+
 # Runtime generated during scans
 backend/runtime/
 

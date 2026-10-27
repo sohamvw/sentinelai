@@ -2,5 +2,11 @@ fastapi
 uvicorn
 gitpython
 pydantic
-pyyaml
+pydantic-settings
+email-validator
+bcrypt
+reportlab
+requests
 python-multipart
+resend
+psycopg2-binary

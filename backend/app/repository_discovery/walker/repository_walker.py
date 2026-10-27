@@ -68,7 +68,9 @@ class RepositoryWalker:
                 continue
 
             # Skip ignored directories
-            if any(part in cls.IGNORE_DIRECTORIES for part in file.parts):
+            relative_parts = file.relative_to(repository_path).parts
+
+            if any(part in cls.IGNORE_DIRECTORIES for part in relative_parts):
                 continue
 
             extension = file.suffix.lower()
@@ -90,5 +92,12 @@ class RepositoryWalker:
             )
 
             index.files.append(file_object)
+            index.total_files += 1
+            index.total_size += file_object.size
+            index.languages[language] = index.languages.get(language, 0) + 1
+
+            for parent in Path(file_object.relative_path).parents:
+                if str(parent) != ".":
+                    index.directories.add(str(parent))
 
         return index

@@ -5,22 +5,23 @@ from app.models.scan import Scan
 
 class WorkspaceManager:
 
-    ROOT = Path("runtime/workspaces")
+    ROOT = Path(__file__).resolve().parents[2] / "runtime" / "workspaces"
+
+    FOLDERS = [
+        "repository",
+        "blueprint",
+        "findings",
+        "reports",
+        "logs"
+    ]
 
     @classmethod
     def create_workspace(cls, scan: Scan):
 
         workspace = cls.ROOT / scan.scan_id
 
-        folders = [
-            "repository",
-            "blueprint",
-            "findings",
-            "reports",
-            "logs"
-        ]
+        for folder in cls.FOLDERS:
 
-        for folder in folders:
             (workspace / folder).mkdir(
                 parents=True,
                 exist_ok=True

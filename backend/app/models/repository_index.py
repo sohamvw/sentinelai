@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Dict, List
+from typing import Dict, List, Set
 
 from app.models.file_object import FileObject
 
@@ -8,6 +8,8 @@ from app.models.file_object import FileObject
 class RepositoryIndex:
 
     files: List[FileObject] = field(default_factory=list)
+
+    directories: Set[str] = field(default_factory=set)
 
     total_files: int = 0
 
